@@ -12,7 +12,7 @@ head(salaries)
 
 
 ui <- fluidPage(
-  titlePanel("Salary Dataset Multi-Filter Search"),
+  titlePanel("Sunshine List Filters"),
   
   sidebarLayout(
     sidebarPanel(
@@ -22,7 +22,6 @@ ui <- fluidPage(
       textInput("job_title", "Filter by Job Title:", placeholder = "Enter job title..."),
       numericInput("min_salary", "Minimum Salary:", value = NA, min = 0),
       numericInput("max_salary", "Maximum Salary:", value = NA, min = 0),
-      numericInput("year", "Filter by Year:", value = NA, min = 2000, max = 2100),
       actionButton("submit", "Apply Filters"),
       width = 4
     ),
@@ -55,9 +54,6 @@ server <- function(input, output, session) {
     }
     if (!is.na(input$max_salary)) {
       data <- data %>% filter(Salary <= input$max_salary)
-    }
-    if (!is.na(input$year)) {
-      data <- data %>% filter(Year == input$year)
     }
     
     data
